@@ -5,16 +5,16 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/login-service/entity"
+	"login-service/database"
+	"login-service/entity"
 )
 
 //get user data from database
 func GetUser(ctx *gin.Context) {
-
-	var p entity.UserProfile
-
-	fmt.Println(p)
-	ctx.JSON(200, p)
+	phoneNumber := ctx.Param("phonenumber")
+	fmt.Println(phoneNumber)
+	userProfile := database.GetUser(phoneNumber)
+	ctx.JSON(200, userProfile)
 }
 func SendOTP(ctx *gin.Context) {
 	//use twillio here to send otp

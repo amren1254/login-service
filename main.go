@@ -1,9 +1,10 @@
 package main
 
 import (
+	"login-service/database"
+	"login-service/router"
+
 	_ "github.com/lib/pq"
-	"github.com/login-service/database"
-	"github.com/login-service/router"
 )
 
 //var db *sql.DB

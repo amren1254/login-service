@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/login-service/entity"
+	"login-service/entity"
 )
 
 const (
@@ -38,9 +38,10 @@ func CreatConnectionTodb() {
 }
 
 //Get user from db
-func GetUser(p entity.UserProfile) {
-	CreatConnectionTodb()
-	db.QueryRow("SELECT fullname, emailid, phonenumber FROM userprofile where phonenumber='88967264840'").Scan(&p.FullName, &p.EmailId, &p.PhoneNumber)
+func GetUser(phoneNumber string) entity.UserProfile {
+	var p entity.UserProfile
+	db.QueryRow("SELECT fullname, emailid, phonenumber FROM userprofile where phonenumber=$1", phoneNumber).Scan(&p.FullName, &p.EmailId, &p.PhoneNumber)
+	return p
 }
 
 //verify otp received from user
