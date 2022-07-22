@@ -2,6 +2,7 @@
 -- \l+ -> to show show databases
 -- sudo -u postgres psql postgres
 -- ALTER USER postgres PASSWORD 'root';
+--- \c userlogin; -. to select database
 CREATE DATABASE userlogin;
 
 ALTER TABLE userprofile ALTER COLUMN phonenumber TYPE varchar(14);
