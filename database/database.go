@@ -36,6 +36,15 @@ func CreatConnectionTodb() {
 	}
 	fmt.Println("Database connected successfully")
 }
+func AddPhoneNumber(phoneNumber string) bool {
+	_, err := db.Exec("INSERT INTO userprofile (phonenumber) VALUES ($1)",
+		phoneNumber)
+	if err != nil {
+		log.Println("Phone Number insertion to db failed", err.Error())
+		return false
+	}
+	return true
+}
 
 //Get user from db
 func GetUser(phoneNumber string) entity.UserProfile {
@@ -44,16 +53,14 @@ func GetUser(phoneNumber string) entity.UserProfile {
 	return p
 }
 
-//verify otp received from user
-//update isVerified cloumn to true
-func ValidateOTP(otp entity.OTP) {
-	CreatConnectionTodb()
+func ValidateOTP(otp entity.OTP) bool {
 	_, err := db.Exec("UPDATE userprofile SET isverified=$1 WHERE phonenumber=$2",
 		true, otp.PhoneNumber)
 	if err != nil {
 		log.Println("Db Update failed", err.Error())
+		return false
 	}
-
+	return true
 }
 
 //check if isVerified column is true, create user else don't

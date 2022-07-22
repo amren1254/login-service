@@ -9,7 +9,7 @@ import (
 func InitRouter() {
 	router := gin.Default()
 	router.GET("/user/:phonenumber", controller.GetUser)
-	router.POST("/sendotp", controller.SendOTP)
+	router.POST("/sendotp/:phonenumber", controller.SendOTP)
 	router.POST("validateotp", controller.ValidateOTP)
 	router.POST("user", controller.CreateUser)
 	router.POST("login", controller.Login)
