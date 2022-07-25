@@ -7,6 +7,7 @@ import (
 
 	"login-service/database"
 	"login-service/entity"
+	twillio "login-service/twilio"
 )
 
 //get user data from database
@@ -50,4 +51,14 @@ func Login(ctx *gin.Context) {
 	//1. verify if the phone number/ user exists in the db
 	//2. if exists, send otp
 
+}
+func CreateOtp(c *gin.Context) {
+	var t entity.SendOTP
+	if err := c.ShouldBindJSON(&t); err != nil {
+		c.JSON(401, gin.H{"error": err.Error()})
+		return
+	}
+	twillio.InitTwilio(t)
+
+	c.JSON(200, t)
 }

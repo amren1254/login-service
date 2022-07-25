@@ -17,3 +17,4 @@
 login-service
 go.mod
 go.sum
+.env
