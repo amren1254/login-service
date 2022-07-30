@@ -12,4 +12,5 @@ type OTP struct {
 }
 type SendOTP struct {
 	PhoneNumber string `json:"phonenumber"`
+	Code        string `json:"code"`
 }
