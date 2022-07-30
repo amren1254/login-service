@@ -7,7 +7,7 @@ import (
 
 	"login-service/database"
 	"login-service/entity"
-	twillio "login-service/twilio"
+	"login-service/twilio"
 )
 
 //get user data from database
@@ -58,7 +58,18 @@ func CreateOtp(c *gin.Context) {
 		c.JSON(401, gin.H{"error": err.Error()})
 		return
 	}
-	twillio.InitTwilio(t)
+	twilio.InitTwilio(t)
 
 	c.JSON(200, t)
+}
+
+func VerifyOtp(c *gin.Context) {
+	var t entity.SendOTP
+	if err := c.ShouldBindJSON(&t); err != nil {
+		c.JSON(401, gin.H{"error": err.Error()})
+		return
+	}
+	twilio.InitTwilio(t)
+
+	c.JSON(200, "otp verified")
 }

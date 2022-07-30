@@ -14,6 +14,7 @@ func InitRouter() {
 	router.POST("user", controller.CreateUser)
 	router.POST("login", controller.Login)
 	router.POST("otp", controller.CreateOtp)
+	router.POST("verifyotp", controller.VerifyOtp)
 
 	router.Run()
 
